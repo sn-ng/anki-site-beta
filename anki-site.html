@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="anki-site.css">
+    </head>
+    <body>
+        <header class="css-header">
+            <h1>暗記サイト</h1>
+            <div class="header-buttons">
+                <button id="anki-button">暗記する</button>
+                <button id="explain-button">概要</button>
+                <button id="create-destroy-button">新規作成/削除</button>
+            </div>
+        </header>
+        <main class="css-main">
+            <div id="anki">
+                <div id="group-select">
+                    <h2>セットを選択</h2>
+                    <div id="group-list">
+                        
+                    </div> 
+                </div>
+                <div id="all-or-important-select">
+                    <h2>どちらかを選択。</h2>
+                    <button id="select-all">全て</button>
+                    <button id="select-checked">チェックのみ</button>
+                </div>
+                <div class="card">
+                    <p id="question">問題</p>
+                    <div class="image-answer">
+                        <img id="question-image">
+                        <button id="expansion">拡大</button>
+                        <p id="answer-box">答えは:<span id="answer"></span></p>
+                        <div id="image-modal">
+                            <img id="expanded-image">
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <input type="checkbox" id="check-card"> 
+                        <button id="prev-question">前</button>
+                        <button id="next-question">次</button>
+                        <button id="see-answer">答</button>
+                    </div>
+                </div>
+                <div id="finish-screen">
+                    <h2>終了</h2>
+                    <p>お疲れ様でした。</p>
+                    <button id="back-home">戻る</button>
+                </div>
+            </div>
+            <div id="explain">
+                <h2 class="t">説明</h2>
+                <p>暗記サイト。</p>
+                <p>実装したい機能は↓</p>
+                <ul>
+                    <li>カード</li>
+                    <li>カードへのコメント、チェック</li>
+                    <li>カード新規作成</li>
+                    <li>画像</li>
+                </ul>
+            </div>
+            <div id="create-destroy">
+                <h2>新規作成/削除</h2>
+                <h3>セットの新規作成</h3>
+                <label>
+                    セットの名前
+                    <input id="new-group-name" type="text" placeholder="新しいセットの名前を入力。">
+                    <button id="decision-new-group-name" disabled>決定</button>
+                </label>
+                <h3>セットの削除</h3>
+                <select id="group-destroy-list"></select>
+                <button id="group-destroy-button">削除</button>
+                <br><hr>
+                <h3>問題の新規作成</h3>
+                <label>
+                    問題文
+                    <input id="new-question" type="text" placeholder="新しく追加する問題文を入力。"><br>
+                    答え
+                    <input id="new-answer" type="text" placeholder="問題文に対応する答えを入力。"><br>
+                    所属するセット
+                    <select id="select--where-group"></select><br>
+                    写真を載せる場合は:
+                    <input type="file" accept="image/*" id="new-question-image"><br>
+                    画像の選択を解除:
+                    <button id="reset-new-question-image" type="button">解除</button>
+                    <button id="decision-new-question" disabled>決定</button>
+                </label>
+                <h3>問題の変更</h3>
+                <select id="select-change-question-box"></select>
+                <button id="select-change-question-button">変更するものを選択</button>
+                <label id="change-question-screen">
+                    問題文
+                    <input id="change-question-box" type="text" value=""><br>
+                    答え
+                    <input id="change-answer-box" type="text" value=""><br>
+                    所属するセット
+                    <select id="change-group-box"></select><br>
+                    写真
+                    <input id="change-image-box" type="file" accept="image/*">
+                </label>
+                <button id="keep-change-group-button">変更内容を保存</button>
+                <h3>問題の削除</h3>
+                <select id="destroy-question-box"></select>
+                <button id="destroy-question-button">削除</button>
+            </div>
+        </main>
+        <footer class="css-footer">
+            <p>暗記サイトver.beta4.0</p>
+        </footer>
+        <script src="anki-site.js"></script>
+    </body>
+</html>
