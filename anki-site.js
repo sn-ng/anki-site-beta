@@ -22,8 +22,8 @@ const GroupSelect = document.getElementById("group-select")
 const AllOrImportantSelect = document.getElementById("all-or-important-select")
 
 //全てor重要関係の定義
-const SelectAll = document.getElementById("select-all")
-const SelectChecked = document.getElementById("select-checked")
+const SelectAll = document.getElementById("select-all-order")
+const SelectChecked = document.getElementById("select-checked-order")
 
 //カードの定義
 const Card = document.querySelector(".card")
@@ -35,6 +35,12 @@ let NewQuestionImageData = null
 const ResetNewQuestionImage = document.getElementById("reset-new-question-image")
 const QuestionImage = document.getElementById("question-image")
 
+//ランダム関係の定義
+const SelectAllRandom = document.getElementById("select-all-random")
+const SelectCheckedRandom = document.getElementById("select-checked-random")
+
+//問題共有関係の定義
+const ShareQuestion = document.getElementById("share-question")
 
 
 //=====================================================================
@@ -89,8 +95,10 @@ function updateCheckedButton(){
     checkedQuestions = currentQuestions.filter(question => question.checked === true)
     if(checkedQuestions.length === 0){
         SelectChecked.style.display = "none";
+        SelectCheckedRandom.style.display = "none"
     }else{
         SelectChecked.style.display = "block";
+        SelectCheckedRandom.style.display = "block"
     }
 }
 
@@ -543,6 +551,21 @@ GroupDestroyButton.addEventListener("click",()=>{
     }
 })
 
+//=====================================================================
+//ランダム機能
+//=====================================================================
+function StartAnki(question,random){
+    AllOrImportantSelect.style.display = "none";
+    currentQuestions = [...question]
+    if(random === true){
+        currentQuestions.sort(()=> Math.random()-0.5)
+    }
+    
+    ankistart();
+
+    console.log(currentQuestions);
+    console.log(currentQuestions.length);
+}
 
 
 
@@ -578,6 +601,22 @@ updateQuestionList()
 SeeFirst()
 
 SelectAll.addEventListener("click",()=>{
+    StartAnki(currentQuestions,false)
+})
+
+SelectChecked.addEventListener("click",()=>{
+    StartAnki(checkedQuestions,false)
+})
+
+SelectAllRandom.addEventListener("click",()=>{
+    StartAnki(currentQuestions,true)
+})
+
+SelectCheckedRandom.addEventListener("click",()=>{
+    StartAnki(checkedQuestions,true)
+})
+
+/*SelectAll.addEventListener("click",()=>{
     AllOrImportantSelect.style.display = "none";
     ankistart();
 })
@@ -586,7 +625,7 @@ SelectChecked.addEventListener("click",()=>{
     AllOrImportantSelect.style.display = "none";
     currentQuestions = checkedQuestions;
     ankistart();
-})
+})*/
 
 
 //カードクリックされた時
