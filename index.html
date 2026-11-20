@@ -24,8 +24,10 @@
                 </div>
                 <div id="all-or-important-select">
                     <h2>どちらかを選択。</h2>
-                    <button id="select-all">全て</button>
-                    <button id="select-checked">チェックのみ</button>
+                    <button id="select-all-order">全て(順序)</button>
+                    <button id="select-checked-order">チェックのみ(順序)</button><br>
+                    <button id="select-all-random">全て(ランダム)</button>
+                    <button id="select-checked-random">チェックのみ(ランダム)</button>
                 </div>
                 <div class="card">
                     <p id="question">問題</p>
@@ -53,12 +55,22 @@
             <div id="explain">
                 <h2 class="t">説明</h2>
                 <p>暗記サイト。</p>
-                <p>実装したい機能は↓</p>
+                <p>機能は↓</p>
                 <ul>
                     <li>カード</li>
-                    <li>カードへのコメント、チェック</li>
-                    <li>カード新規作成</li>
+                    <li>カードチェック</li>
+                    <li>カード新規作成、変更、削除</li>
+                    <li>セット</li>
+                    <li>セット新規作成、削除</li>
                     <li>画像</li>
+                    <li>localstrage保存</li>
+                </ul>
+                <p>追加したい機能は↓</p>
+                <ul>
+                    <li>ランダム機能</li>
+                    <li>テキストでコピペ</li>
+                    <li>解答欄を作って答え合わせ</li>
+                    <li>問題変更時に画像も変更</li>
                 </ul>
             </div>
             <div id="create-destroy">
@@ -104,6 +116,17 @@
                 <h3>問題の削除</h3>
                 <select id="destroy-question-box"></select>
                 <button id="destroy-question-button">削除</button>
+                <hr>
+                <h3>問題共有</h3>
+                <p>このテキストボックスの横のコピーボタンを押して共有</p>
+                <label>
+                    セットを選択
+                    <select id="share-set"></select>
+                    共有
+                    <textarea id="share-question"></textarea>
+                    コピー
+                    <button id="share-copy-button">コピー</button>
+                </label>
             </div>
         </main>
         <footer class="css-footer">
