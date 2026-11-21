@@ -1,3 +1,5 @@
+alert("LOCAL TEST 123");
+
 //======================================================================
 //定義群
 //======================================================================
@@ -40,7 +42,9 @@ const SelectAllRandom = document.getElementById("select-all-random")
 const SelectCheckedRandom = document.getElementById("select-checked-random")
 
 //問題共有関係の定義
+const ShareGroup = document.getElementById("share-group")
 const ShareQuestion = document.getElementById("share-question")
+const ShareCopyButton = document.getElementById("share-copy-button")
 
 
 //=====================================================================
@@ -566,8 +570,48 @@ function StartAnki(question,random){
     console.log(currentQuestions);
     console.log(currentQuestions.length);
 }
+function updateShareGroup(){
+    ShareGroup.innerHTML = ""
+    groups.forEach(group=>{
+        const NewOption = document.createElement("option")
+        NewOption.innerText = group.name
+        NewOption.value = group.id
+        ShareGroup.appendChild(NewOption)
+    })
+}
 
+function createShareText(){
+    const SelectedGroup = groups.find(group => group.id === ShareGroup.value)
+    let ShareText = ""
+    SelectedGroup.questions.forEach(question=>{
+        ShareText += question.question
+        ShareText += "\t"
+       ShareText += question.answer
+       ShareText += "\n"
+    })
+    return ShareText
+}
+updateShareGroup()
+ShareQuestion.value = createShareText()
 
+/*function updateGroupList(){
+
+    GroupList.innerHTML = ""
+
+    groups.forEach(group=>{
+    const NewButton = document.createElement("button");
+    NewButton.innerText = group.name
+    NewButton.id=group.id;
+    GroupList.appendChild(NewButton)
+
+    NewButton.addEventListener("click",()=>{
+    currentQuestions = group.questions;
+    GroupSelect.style.display = "none";
+    AllOrImportantSelect.style.display = "block";
+    updateCheckedButton();
+    })
+    })
+}*/
 
 
 //=====================================================================
@@ -662,6 +706,10 @@ CheckCard.addEventListener("change",()=>{
     updateCheckedButton();
 })
 
+ShareGroup.addEventListener("change",()=>{
+    ShareQuestion.value = createShareText()
+})
+
 //メニューのクリックイベント
 AnkiButton.addEventListener("click",()=>{
     Anki.style.display = "block";
@@ -679,6 +727,10 @@ CreateDestroyButton.addEventListener("click",()=>{
     Anki.style.display = "none";
     Explain.style.display = "none";
     CreateDestroy.style.display = "block";
+})
+
+ShareCopyButton.addEventListener("click",()=>{
+    navigator.clipboard.writeText(ShareQuestion.value)
 })
 
 //最後戻る
