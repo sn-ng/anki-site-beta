@@ -450,6 +450,8 @@ KeepChangeGroupButton.addEventListener("click",()=>{
         KeepChangeGroupButton.style.display ="none"
     }
     Reader.readAsDataURL(ChangeImageBox.files[0])
+    SaveGroups()
+    updateShareText()
 })
 DestroyQuestionButton.addEventListener("click",()=>{
     if(confirm("本当に削除しますか？")){
@@ -565,7 +567,6 @@ function StartAnki(question,random){
     }
     
     ankistart();
-
     console.log(currentQuestions);
     console.log(currentQuestions.length);
 }
@@ -589,6 +590,9 @@ function createShareText(){
        ShareText += "\n"
     })
     return ShareText
+}
+function updateShareText(){
+    ShareQuestion.value = createShareText()
 }
 updateShareGroup()
 ShareQuestion.value = createShareText()
@@ -732,6 +736,23 @@ ShareCopyButton.addEventListener("click",()=>{
     navigator.clipboard.writeText(ShareQuestion.value)
 })
 
+ShareQuestion.addEventListener("input",()=>{
+    const ChoiceGroup = groups.find(group=>group.id === ShareGroup.value)
+    const QuestionList = ShareQuestion.value.split("\n")
+
+    const NewQuestions = QuestionList
+        .filter(item => item !== "")
+        .map(item=>{
+        const Parts = item.split("\t")
+        return {
+            question:Parts[0],
+            answer:Parts[1],
+            checked:false
+        }
+    })
+    ChoiceGroup.questions = NewQuestions
+    SaveGroups()
+})
 //最後戻る
 const BackHome = dg("back-home")
 BackHome.addEventListener("click",()=>{
